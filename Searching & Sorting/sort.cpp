@@ -58,9 +58,56 @@ void bubbleSort(int arr[], int n)
         cout << arr[i] << " ";
 }
 
+int QuickSort(int arr[], int start, int end)
+{
+    int pivot = start;
+    int leftI = start;
+    int rightI = end;
+
+    while (leftI < rightI)
+    {
+        while (arr[leftI] <= arr[rightI] && leftI != rightI)
+        {
+            rightI--;
+        }
+        if (leftI == rightI)
+            return pivot;
+        int tem = arr[pivot];
+        arr[pivot] = arr[rightI];
+        arr[rightI] = tem;
+        pivot = rightI;
+        leftI++;
+        while (arr[pivot]>=arr[leftI] && leftI!=rightI)
+        {
+            leftI++;
+        }
+
+        if (leftI == rightI)
+            return pivot;
+         tem = arr[pivot];
+        arr[pivot] = arr[leftI];
+        arr[leftI] = tem;
+        pivot = leftI;
+        rightI--;
+    };
+    return start;
+}
+
+void Quick(int arr[],int start,int end){
+    if(start<end){
+        int mid = QuickSort(arr,start,end);
+        Quick(arr,start,mid-1);
+        Quick(arr,mid+1,end);
+    }
+}
+
+
 int main()
 {
     int arr[] = {4, 3, 44, 23, 12, 64, 2};
-    bubbleSort(arr, sizeof(arr) / sizeof(arr[0]));
+    Quick(arr, 0,sizeof(arr) / sizeof(arr[0])-1);
+
+    for (int i = 0; i < 7; i++)
+        cout << arr[i] << " ";
     return 0;
 }
