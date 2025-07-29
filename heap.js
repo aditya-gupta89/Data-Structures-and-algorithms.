@@ -31,7 +31,7 @@ class Heap {
   heapSort() {
     let n = this.#arr.length;
     // Build heap (rearrange array) , time complexity is O(n) for this 
-    for (let i = parseInt(n - 1); i >= 0; i--) {
+    for (let i = Math.floor((n - 1) / 2); i >= 0; i--) {
       this.downheapify(i);
     }
 
