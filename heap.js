@@ -20,23 +20,24 @@ class Heap {
     if (this.#arr.length > 0) return this.#arr[0];
     else return undefined;
   }
-
-  pop() {
-    // this strategies is use full when we have max/min heap and you just need to set the value and make the heap again , here we know top value is max or min , swap with last and run the downHeapify without that index
-    this.swap(0, this.#arr.length - 1);
-    this.#arr.pop();
-    this.downheapify(0);
+  pop(){
+    let temp = this.#arr[0];
+    this.#arr[0] = this.#arr[this.#arr.length-1];
+    this.#arr.length = this.#arr.length-1;
+      return temp;
   }
+ 
 
-  heapSort() {
-    let n = this.#arr.length;
-    // Build heap (rearrange array) , time complexity is O(n) for this 
+  heapSort(arr) {
+    let n = arr.length;
+    this.#arr = arr;
+    // Build heap (rearrange array) , time complexity is O(n) for this
     for (let i = Math.floor((n - 1) / 2); i >= 0; i--) {
       this.downheapify(i);
     }
 
     // One by one extract an element from heap , time complexity is O(nlogn),[NOTE] if we have frequency or know only k element need to push then we need to tranverse n and heapify for k
-    //  so time complexity is O(nlogk) , n is the no of element to tranverse , k is the size of the heap . 
+    //  so time complexity is O(nlogk) , n is the no of element to tranverse , k is the size of the heap .
     for (let i = n - 1; i >= 0; i--) {
       // Move current root to end
       let temp = arr[0];
@@ -91,7 +92,7 @@ heap.insert(2);
 heap.insert(6);
 heap.display();
 
-// [3,2,3,1,2,4,5,5,6]
+// [3,2,3,1,2,4,5,5]
 
 // 3,
 // 2,3
